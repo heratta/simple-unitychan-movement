@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace Helab.Simply.Movement
+namespace Helab.Movement
 {
-    public abstract class SimpleKineticEnergy : MonoBehaviour
+    public abstract class KineticEnergy : MonoBehaviour
     {
         public bool IsEnabledUpdate { get; set; } = true;
         

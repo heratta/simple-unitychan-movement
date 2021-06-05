@@ -1,20 +1,20 @@
 using System.Linq;
 using UnityEngine;
 
-namespace Helab.Simply.Movement
+namespace Helab.Movement
 {
     [DefaultExecutionOrder(10)]
     [RequireComponent(typeof(CharacterController))]
-    public class SimpleMovement : MonoBehaviour
+    public class Movement : MonoBehaviour
     {
         private CharacterController _characterController;
 
-        private SimpleKineticEnergy[] _kineticEnergies;
+        private KineticEnergy[] _kineticEnergies;
         
         private void Start()
         {
             _characterController = GetComponent<CharacterController>();
-            _kineticEnergies = GetComponents<SimpleKineticEnergy>();
+            _kineticEnergies = GetComponents<KineticEnergy>();
         }
         
         private void Update()

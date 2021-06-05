@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace Helab.Simply.Movement
+namespace Helab.Movement
 {
-    public class SimpleGravityEnergy : SimpleKineticEnergy
+    public class GravityEnergy : KineticEnergy
     {
         [SerializeField] private float gravitationalAcceleration = 9.8f;
 
