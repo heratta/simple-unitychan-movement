@@ -6,6 +6,7 @@ namespace Sample
 {
     [DefaultExecutionOrder(-10)]
     [RequireComponent(typeof(CharacterController))]
+    [RequireComponent(typeof(Movement))]
     [RequireComponent(typeof(GravityEnergy))]
     [RequireComponent(typeof(ThrustEnergy))]
     [RequireComponent(typeof(TurnAroundWithDirection))]
