@@ -26,6 +26,11 @@ namespace Helab.Simply
 
         private void UpdateCameraEyeTarget()
         {
+            if (followTarget == null)
+            {
+                return;
+            }
+            
             transform.position = followTarget.position;
         }
 
