@@ -6,11 +6,14 @@ using UnityEngine;
 namespace Sample
 {
     [RequireComponent(typeof(ThrustEnergy))]
+    [RequireComponent(typeof(JumpEnergy))]
     public class UnityChanAnimation : MonoBehaviour
     {
         private static readonly int Speed = Animator.StringToHash("Speed");
         
         private ThrustEnergy _thrustEnergy;
+        
+        private JumpEnergy _jumpEnergy;
         
         private PlayableAnimator _playableAnimator;
         
@@ -18,6 +21,7 @@ namespace Sample
         {
             Idle,
             Run,
+            Jump,
         }
 
         private AnimationState _animationState;
@@ -27,6 +31,7 @@ namespace Sample
         private void Start()
         {
             _thrustEnergy = GetComponent<ThrustEnergy>();
+            _jumpEnergy = GetComponent<JumpEnergy>();
             _playableAnimator = GetComponentInChildren<PlayableAnimator>();
             _animationState = AnimationState.Idle;
             
@@ -63,6 +68,7 @@ namespace Sample
             {
                 AnimationState.Idle => "WAIT00",
                 AnimationState.Run  => "UnityChanLocomotions",
+                AnimationState.Jump => "JUMP00",
                 _                   => throw new ArgumentOutOfRangeException()
             };
         }
@@ -73,7 +79,11 @@ namespace Sample
             {
             case AnimationState.Idle:
                 {
-                    if (_thrustEnergy.IsEnabledUpdate)
+                    if (_jumpEnergy.IsEnabledUpdate)
+                    {
+                        _animationState = AnimationState.Jump;
+                    }
+                    else if (_thrustEnergy.IsEnabledUpdate)
                     {
                         _animationState = AnimationState.Run;
                     }
@@ -81,12 +91,25 @@ namespace Sample
                 break;
             case AnimationState.Run:
                 {
-                    if (!_thrustEnergy.IsEnabledUpdate)
+                    if (_jumpEnergy.IsEnabledUpdate)
+                    {
+                        _animationState = AnimationState.Jump;
+                    }
+                    else if (!_thrustEnergy.IsEnabledUpdate)
                     {
                         _animationState = AnimationState.Idle;
                     }
                     
                     _playableAnimator.SetValueToAnimator(Speed, _thrustEnergy.ThrustMeasure);
+                }
+                break;
+            case AnimationState.Jump:
+                {
+                    if (!_jumpEnergy.IsEnabledUpdate)
+                    {
+                        _animationState = _thrustEnergy.IsEnabledUpdate ?
+                            AnimationState.Run : AnimationState.Idle;
+                    }
                 }
                 break;
             default:
