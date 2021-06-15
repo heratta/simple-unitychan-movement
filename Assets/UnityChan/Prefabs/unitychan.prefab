@@ -2144,6 +2144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clips:
   - {fileID: 7400000, guid: 0147e212f97e3d449a4b9e4f5d057180, type: 3}
+  - {fileID: 7400000, guid: ac75d16809dc0054d8e3449e7ba665f2, type: 3}
   controllers:
   - {fileID: 9100000, guid: 8d5a0e0d58f4e4176a844a1a03976c19, type: 2}
 --- !u!114 &5428413893498072009
